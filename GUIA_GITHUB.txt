@@ -1,0 +1,264 @@
+═══════════════════════════════════════════════════════════════════════════════
+                    GUÍA DETALLADA: SUBIR PROYECTO A GITHUB
+═══════════════════════════════════════════════════════════════════════════════
+
+📋 PREREQUISITOS:
+───────────────────────────────────────────────────────────────────────────────
+1. Tener Git instalado en tu computadora
+   - Descargar desde: https://git-scm.com/downloads
+   - Verificar instalación: git --version
+
+2. Tener una cuenta en GitHub
+   - Crear cuenta en: https://github.com
+
+3. Tener creado el repositorio en GitHub
+   - Ir a: https://github.com/new
+   - Crear repositorio con el nombre deseado (ej: "proyecto")
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                    PASO 1: CONFIGURAR GIT (SOLO LA PRIMERA VEZ)
+═══════════════════════════════════════════════════════════════════════════════
+
+Abrir PowerShell o CMD y ejecutar:
+
+    git config --global user.name "Tu Nombre"
+    git config --global user.email "tu-email@ejemplo.com"
+
+Ejemplo:
+    git config --global user.name "Sunshide12"
+    git config --global user.email "sunshide@ejemplo.com"
+
+NOTA: Estos datos aparecerán en tus commits, úsalos solo una vez.
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                    PASO 2: NAVEGAR A LA CARPETA DEL PROYECTO
+═══════════════════════════════════════════════════════════════════════════════
+
+Abrir PowerShell o CMD y navegar a tu proyecto:
+
+    cd c:\laragon\www\proyecto
+
+NOTA: Cambia la ruta según donde esté tu proyecto.
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                    PASO 3: INICIALIZAR REPOSITORIO GIT
+═══════════════════════════════════════════════════════════════════════════════
+
+Si es la primera vez que subes este proyecto, ejecutar:
+
+    git init
+
+Esto crea una carpeta oculta .git en tu proyecto.
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                    PASO 4: CREAR ARCHIVO .gitignore (OPCIONAL)
+═══════════════════════════════════════════════════════════════════════════════
+
+Crear un archivo llamado ".gitignore" en la raíz del proyecto para excluir
+archivos que no quieres subir (archivos temporales, node_modules, etc.)
+
+Ya está creado en tu proyecto, pero si necesitas agregar más archivos:
+
+    - Abrir .gitignore con un editor de texto
+    - Agregar nombres de archivos o carpetas que quieres ignorar
+    - Guardar el archivo
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                    PASO 5: AGREGAR ARCHIVOS AL STAGING
+═══════════════════════════════════════════════════════════════════════════════
+
+Agregar todos los archivos del proyecto:
+
+    git add .
+
+O agregar archivos específicos:
+
+    git add nombre-archivo.js
+    git add carpeta/
+
+NOTA: El punto (.) significa "todos los archivos"
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                    PASO 6: CREAR COMMIT (GUARDAR CAMBIOS)
+═══════════════════════════════════════════════════════════════════════════════
+
+Crear un commit con un mensaje descriptivo:
+
+    git commit -m "Descripción de los cambios realizados"
+
+Ejemplos de mensajes:
+    git commit -m "Initial commit: Sistema de autenticación con Supabase"
+    git commit -m "Agregar validaciones de contraseña"
+    git commit -m "Corregir error en login"
+    git commit -m "Actualizar estilos CSS"
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                    PASO 7: CONECTAR CON REPOSITORIO DE GITHUB
+═══════════════════════════════════════════════════════════════════════════════
+
+Agregar la URL del repositorio remoto (solo la primera vez):
+
+    git remote add origin https://github.com/USUARIO/NOMBRE-REPO.git
+
+Ejemplo:
+    git remote add origin https://github.com/Sunshide12/proyecto.git
+
+NOTA: Si ya existe el remote, puedes cambiarlo con:
+    git remote set-url origin https://github.com/USUARIO/NOMBRE-REPO.git
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                    PASO 8: CAMBIAR RAMA A MAIN (SI ES NECESARIO)
+═══════════════════════════════════════════════════════════════════════════════
+
+GitHub ahora usa "main" en lugar de "master":
+
+    git branch -M main
+
+NOTA: Solo necesario si tu rama se llama "master"
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                    PASO 9: SUBIR CÓDIGO A GITHUB
+═══════════════════════════════════════════════════════════════════════════════
+
+Subir el código por primera vez:
+
+    git push -u origin main
+
+Para subidas posteriores (después de hacer cambios):
+
+    git push
+
+NOTA: La primera vez te pedirá usuario y contraseña/token de GitHub.
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                    ⚠️  SI HAY ERRORES AL HACER PUSH
+═══════════════════════════════════════════════════════════════════════════════
+
+Si el repositorio remoto tiene cambios que no tienes localmente:
+
+1. Primero traer los cambios remotos:
+    git pull origin main --allow-unrelated-histories
+
+2. Resolver conflictos si los hay (editar archivos marcados)
+
+3. Luego hacer push:
+    git push -u origin main
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                    🔄 FLUJO DE TRABAJO DIARIO (ACTUALIZAR CÓDIGO)
+═══════════════════════════════════════════════════════════════════════════════
+
+Cada vez que hagas cambios y quieras subirlos a GitHub:
+
+1. Ver qué archivos cambiaron:
+    git status
+
+2. Agregar los archivos modificados:
+    git add .
+   (o git add archivo-especifico.js)
+
+3. Crear commit:
+    git commit -m "Descripción de los cambios"
+
+4. Subir a GitHub:
+    git push
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                    📥 DESCARGAR CÓDIGO DE GITHUB (CLONAR)
+═══════════════════════════════════════════════════════════════════════════════
+
+Si quieres descargar el proyecto en otra computadora:
+
+    git clone https://github.com/USUARIO/NOMBRE-REPO.git
+
+Ejemplo:
+    git clone https://github.com/Sunshide12/proyecto.git
+
+Esto crea una carpeta con todo el código del proyecto.
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                    🔑 AUTENTICACIÓN EN GITHUB (IMPORTANTE)
+═══════════════════════════════════════════════════════════════════════════════
+
+GitHub ya no acepta contraseñas, necesitas un Personal Access Token:
+
+1. Ir a GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic)
+
+2. Generar nuevo token:
+   - Click en "Generate new token (classic)"
+   - Darle un nombre (ej: "Mi PC")
+   - Seleccionar permisos: repo (todos los permisos)
+   - Generar token
+   - COPIAR EL TOKEN (solo se muestra una vez)
+
+3. Usar el token como contraseña cuando Git te pida credenciales
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                    📝 COMANDOS ÚTILES ADICIONALES
+═══════════════════════════════════════════════════════════════════════════════
+
+Ver historial de commits:
+    git log
+
+Ver cambios en archivos:
+    git diff
+
+Deshacer cambios en un archivo (antes de hacer add):
+    git checkout -- nombre-archivo.js
+
+Deshacer el último commit (manteniendo los cambios):
+    git reset --soft HEAD~1
+
+Ver qué remotes tienes configurados:
+    git remote -v
+
+Ver en qué rama estás:
+    git branch
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                    ✅ RESUMEN RÁPIDO (COMANDOS ESENCIALES)
+═══════════════════════════════════════════════════════════════════════════════
+
+Primera vez:
+    cd c:\laragon\www\proyecto
+    git init
+    git add .
+    git commit -m "Initial commit"
+    git remote add origin https://github.com/USUARIO/REPO.git
+    git branch -M main
+    git push -u origin main
+
+Actualizaciones diarias:
+    git add .
+    git commit -m "Descripción de cambios"
+    git push
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                    🎯 TU PROYECTO YA ESTÁ EN GITHUB
+═══════════════════════════════════════════════════════════════════════════════
+
+URL de tu repositorio:
+https://github.com/Sunshide12/proyecto.git
+
+Puedes verlo en:
+https://github.com/Sunshide12/proyecto
+
+
+═══════════════════════════════════════════════════════════════════════════════
+
