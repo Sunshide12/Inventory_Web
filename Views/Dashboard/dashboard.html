@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - Sistema de Inventario</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../../CSS/dashboard.css" />
+  </head>
+  <body class="dashboard-page">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo">
+          <i class="bi bi-box-seam-fill"></i>
+          <span class="sidebar-title">Inventario</span>
+        </div>
+        <button class="sidebar-toggle d-md-none" id="sidebarToggle">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="#" class="nav-item active" data-section="dashboard">
+          <i class="bi bi-speedometer2"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="#" class="nav-item" data-section="products">
+          <i class="bi bi-box"></i>
+          <span>Productos</span>
+        </a>
+        <a href="#" class="nav-item" data-section="categories">
+          <i class="bi bi-tags"></i>
+          <span>Categorías</span>
+        </a>
+        <a href="#" class="nav-item" data-section="reports">
+          <i class="bi bi-graph-up"></i>
+          <span>Reportes</span>
+        </a>
+        <a href="#" class="nav-item" data-section="settings">
+          <i class="bi bi-gear"></i>
+          <span>Configuración</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="../Auth/login.html" class="nav-item logout">
+          <i class="bi bi-box-arrow-right"></i>
+          <span>Cerrar Sesión</span>
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Top Header -->
+      <header class="top-header">
+        <div class="header-left">
+          <button
+            class="sidebar-toggle-mobile d-md-none"
+            id="sidebarToggleMobile"
+          >
+            <i class="bi bi-list"></i>
+          </button>
+          <h1 class="page-title">Dashboard</h1>
+        </div>
+        <div class="header-right">
+          <div class="search-box">
+            <i class="bi bi-search"></i>
+            <input
+              type="text"
+              placeholder="Buscar producto..."
+              id="searchInput"
+            />
+          </div>
+          <div class="user-menu">
+            <div class="user-avatar">
+              <i class="bi bi-person-circle"></i>
+            </div>
+            <div class="user-info">
+              <span class="user-name">Usuario</span>
+              <span class="user-role">Administrador</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Dashboard Content -->
+      <main class="dashboard-content">
+        <!-- Statistics Cards -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon primary">
+              <i class="bi bi-box-seam"></i>
+            </div>
+            <div class="stat-content">
+              <h3 class="stat-value" id="totalProducts">0</h3>
+              <p class="stat-label">Total Productos</p>
+            </div>
+            <div class="stat-trend">
+              <i class="bi bi-arrow-up text-success"></i>
+              <span class="text-success">+12%</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon success">
+              <i class="bi bi-check-circle"></i>
+            </div>
+            <div class="stat-content">
+              <h3 class="stat-value" id="availableProducts">0</h3>
+              <p class="stat-label">Disponibles</p>
+            </div>
+            <div class="stat-trend">
+              <i class="bi bi-arrow-up text-success"></i>
+              <span class="text-success">+5%</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon warning">
+              <i class="bi bi-exclamation-triangle"></i>
+            </div>
+            <div class="stat-content">
+              <h3 class="stat-value" id="lowStockProducts">0</h3>
+              <p class="stat-label">Stock Bajo</p>
+            </div>
+            <div class="stat-trend">
+              <i class="bi bi-arrow-down text-warning"></i>
+              <span class="text-warning">-3%</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon info">
+              <i class="bi bi-currency-dollar"></i>
+            </div>
+            <div class="stat-content">
+              <h3 class="stat-value" id="totalValue">$0</h3>
+              <p class="stat-label">Valor Total</p>
+            </div>
+            <div class="stat-trend">
+              <i class="bi bi-arrow-up text-success"></i>
+              <span class="text-success">+8%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Products Section -->
+        <div class="content-section">
+          <div class="section-header">
+            <h2 class="section-title">
+              <i class="bi bi-box me-2"></i>Productos
+            </h2>
+            <button
+              class="btn btn-primary btn-add"
+              data-bs-toggle="modal"
+              data-bs-target="#productModal"
+            >
+              <i class="bi bi-plus-lg me-2"></i>Agregar Producto
+            </button>
+          </div>
+
+          <!-- Products Table -->
+          <div class="table-card">
+            <div class="table-responsive">
+              <table class="table table-hover" id="productsTable">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Categoría</th>
+                    <th>Stock</th>
+                    <th>Precio</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody id="productsTableBody">
+                  <!-- Products will be loaded here -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Empty State -->
+            <div class="empty-state" id="emptyState">
+              <i class="bi bi-inbox"></i>
+              <h3>No hay productos</h3>
+              <p>Comienza agregando tu primer producto al inventario</p>
+              <button
+                class="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#productModal"
+              >
+                <i class="bi bi-plus-lg me-2"></i>Agregar Producto
+              </button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Product Modal -->
+    <div
+      class="modal fade"
+      id="productModal"
+      tabindex="-1"
+      aria-labelledby="productModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="productModalLabel">
+              <i class="bi bi-plus-circle me-2"></i>Agregar Producto
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <form id="productForm" novalidate>
+            <div class="modal-body">
+              <input type="hidden" id="productId" />
+
+              <div class="form-floating mb-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="productName"
+                  placeholder="Nombre del Producto"
+                  required
+                />
+                <label for="productName">
+                  <i class="bi bi-tag me-2"></i>Nombre del Producto
+                </label>
+                <div class="invalid-feedback">
+                  Por favor ingresa el nombre del producto
+                </div>
+              </div>
+
+              <div class="form-floating mb-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="productCategory"
+                  placeholder="Categoría"
+                  required
+                />
+                <label for="productCategory">
+                  <i class="bi bi-tags me-2"></i>Categoría
+                </label>
+                <div class="invalid-feedback">
+                  Por favor ingresa la categoría
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-floating mb-3">
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="productStock"
+                      placeholder="Stock"
+                      required
+                      min="0"
+                    />
+                    <label for="productStock">
+                      <i class="bi bi-box me-2"></i>Stock
+                    </label>
+                    <div class="invalid-feedback">
+                      Por favor ingresa el stock disponible
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-floating mb-3">
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="productPrice"
+                      placeholder="Precio"
+                      required
+                      min="0"
+                      step="0.01"
+                    />
+                    <label for="productPrice">
+                      <i class="bi bi-currency-dollar me-2"></i>Precio
+                    </label>
+                    <div class="invalid-feedback">
+                      Por favor ingresa el precio
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-floating mb-3">
+                <textarea
+                  class="form-control"
+                  id="productDescription"
+                  placeholder="Descripción"
+                ></textarea>
+                <label for="productDescription">
+                  <i class="bi bi-card-text me-2"></i>Descripción
+                </label>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Cancelar
+              </button>
+              <button type="submit" class="btn btn-primary">
+                <i class="bi bi-check-lg me-2"></i>Guardar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Alert Messages -->
+    <div
+      class="alert alert-success alert-dismissible fade"
+      id="successAlert"
+      role="alert"
+    >
+      <i class="bi bi-check-circle-fill me-2"></i>
+      <span id="successMessage"></span>
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+
+    <div
+      class="alert alert-danger alert-dismissible fade"
+      id="errorAlert"
+      role="alert"
+    >
+      <i class="bi bi-exclamation-triangle-fill me-2"></i>
+      <span id="errorMessage"></span>
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="https://esm.sh/@supabase/supabase-js@2"></script>
+
+    <script type="module" src="../../JS/Config/supabaseClient.js"></script>
+    <script type="module" src="../../JS/Dashboard/Dashboard.js"></script>
+  </body>
+</html>

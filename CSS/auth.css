@@ -1,0 +1,528 @@
+/**
+ * ============================================
+ * SISTEMA DE AUTENTICACIÓN - ESTILOS
+ * ============================================
+ * Diseño empresarial, moderno y profesional
+ * Fácilmente personalizable mediante variables CSS
+ */
+
+/* ============================================
+   VARIABLES CSS - PERSONALIZACIÓN DE TEMA
+   ============================================ */
+:root {
+    /* Colores Principales */
+    --primary-color: #6366f1;           /* Color primario (índigo suave) */
+    --primary-hover: #4f46e5;           /* Hover del color primario */
+    --primary-light: #818cf8;           /* Variante clara del primario */
+    --primary-dark: #4338ca;            /* Variante oscura del primario */
+    
+    /* Colores Secundarios */
+    --secondary-color: #8b5cf6;         /* Color secundario (púrpura) */
+    --secondary-hover: #7c3aed;         /* Hover del secundario */
+    
+    /* Colores de Fondo */
+    --bg-primary: #f8fafc;              /* Fondo principal (gris muy claro) */
+    --bg-secondary: #ffffff;            /* Fondo secundario (blanco) */
+    --bg-gradient-start: #667eea;       /* Inicio del gradiente */
+    --bg-gradient-end: #764ba2;         /* Fin del gradiente */
+    
+    /* Colores de Texto */
+    --text-primary: #1e293b;            /* Texto principal (gris oscuro) */
+    --text-secondary: #64748b;          /* Texto secundario (gris medio) */
+    --text-light: #94a3b8;              /* Texto claro */
+    
+    /* Colores de Estado */
+    --success-color: #10b981;           /* Verde éxito */
+    --error-color: #ef4444;             /* Rojo error */
+    --warning-color: #f59e0b;           /* Amarillo advertencia */
+    --info-color: #3b82f6;              /* Azul información */
+    
+    /* Sombras */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    --shadow-card: 0 4px 20px rgba(99, 102, 241, 0.08);
+    
+    /* Bordes */
+    --border-radius-sm: 0.375rem;       /* 6px */
+    --border-radius-md: 0.5rem;         /* 8px */
+    --border-radius-lg: 0.75rem;        /* 12px */
+    --border-radius-xl: 1rem;           /* 16px */
+    --border-radius-2xl: 1.5rem;        /* 24px */
+    --border-color: #e2e8f0;            /* Color de borde */
+    
+    /* Espaciado */
+    --spacing-xs: 0.5rem;               /* 8px */
+    --spacing-sm: 0.75rem;              /* 12px */
+    --spacing-md: 1rem;                 /* 16px */
+    --spacing-lg: 1.5rem;               /* 24px */
+    --spacing-xl: 2rem;                 /* 32px */
+    --spacing-2xl: 3rem;                /* 48px */
+    
+    /* Transiciones */
+    --transition-fast: 0.15s ease-in-out;
+    --transition-base: 0.3s ease-in-out;
+    --transition-slow: 0.5s ease-in-out;
+}
+
+/* ============================================
+   RESET Y ESTILOS BASE
+   ============================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body.auth-page {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-md);
+    color: var(--text-primary);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   CONTENEDOR PRINCIPAL
+   ============================================ */
+.auth-container {
+    width: 100%;
+    max-width: 450px;
+    position: relative;
+}
+
+.auth-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+/* ============================================
+   TARJETA DE AUTENTICACIÓN
+   ============================================ */
+.auth-card {
+    background: var(--bg-secondary);
+    border-radius: var(--border-radius-2xl);
+    padding: var(--spacing-2xl);
+    box-shadow: var(--shadow-xl);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    animation: fadeInUp 0.5s ease-out;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efecto de brillo sutil en la tarjeta */
+.auth-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    opacity: 0.8;
+}
+
+/* Animación de entrada */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================
+   HEADER DE LA TARJETA
+   ============================================ */
+.auth-card-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.auth-icon-wrapper {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto var(--spacing-md);
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: var(--border-radius-xl);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-md);
+    position: relative;
+}
+
+.auth-icon-wrapper::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: var(--border-radius-xl);
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    opacity: 0.3;
+    z-index: -1;
+    filter: blur(8px);
+}
+
+.auth-icon-wrapper i {
+    font-size: 2rem;
+    color: white;
+}
+
+.auth-title {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-xs);
+    letter-spacing: -0.025em;
+}
+
+.auth-subtitle {
+    font-size: 0.9375rem;
+    color: var(--text-secondary);
+    font-weight: 400;
+}
+
+/* ============================================
+   FORMULARIO
+   ============================================ */
+.auth-form {
+    margin-bottom: var(--spacing-lg);
+}
+
+/* Campos de formulario personalizados */
+.form-floating {
+    position: relative;
+}
+
+.form-floating > .form-control {
+    height: calc(3.5rem + 2px);
+    padding: 1rem 0.75rem 0.25rem;
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius-lg);
+    background-color: var(--bg-primary);
+    transition: all var(--transition-base);
+    font-size: 0.9375rem;
+}
+
+.form-floating > .form-control:focus {
+    border-color: var(--primary-color);
+    background-color: var(--bg-secondary);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+    outline: none;
+}
+
+.form-floating > label {
+    padding: 1rem 0.75rem;
+    color: var(--text-secondary);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    transition: all var(--transition-base);
+}
+
+.form-floating > .form-control:focus ~ label,
+.form-floating > .form-control:not(:placeholder-shown) ~ label {
+    color: var(--primary-color);
+    transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
+    opacity: 0.9;
+}
+
+/* Estados de validación */
+.form-control.is-invalid {
+    border-color: var(--error-color);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23ef4444'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath d='m5.8 3.6 .4.4.4-.4m0 4.8-.4-.4-.4.4'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.1875rem) center;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+}
+
+.form-control.is-valid {
+    border-color: var(--success-color);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%2310b981' d='m2.3 6.73.98-.98-.98-.98L2.3 6.73zm1.4-1.4.98-.98-.98-.98-1.4 1.4z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.1875rem) center;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+}
+
+.invalid-feedback {
+    display: none;
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 0.875rem;
+    color: var(--error-color);
+    font-weight: 500;
+}
+
+/* Mostrar mensajes de error solo cuando el campo es inválido */
+.form-control.is-invalid ~ .invalid-feedback,
+.form-check-input.is-invalid ~ .invalid-feedback,
+.was-validated .form-control:invalid ~ .invalid-feedback,
+.was-validated .form-check-input:invalid ~ .invalid-feedback {
+    display: block;
+}
+
+/* Checkbox personalizado */
+.form-check-input {
+    width: 1.125rem;
+    height: 1.125rem;
+    margin-top: 0.125rem;
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    transition: all var(--transition-base);
+    cursor: pointer;
+}
+
+.form-check-input:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.form-check-input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.form-check-input.is-invalid {
+    border-color: var(--error-color);
+}
+
+.form-check-input.is-invalid:focus {
+    border-color: var(--error-color);
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.form-check-label {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    user-select: none;
+}
+
+/* ============================================
+   BOTONES
+   ============================================ */
+.btn-auth {
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: var(--border-radius-lg);
+    transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
+    text-transform: none;
+    letter-spacing: 0.01em;
+}
+
+.btn-primary.btn-auth {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border: none;
+    color: white;
+    box-shadow: var(--shadow-md);
+}
+
+.btn-primary.btn-auth:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    background: linear-gradient(135deg, var(--primary-hover), var(--secondary-hover));
+}
+
+.btn-primary.btn-auth:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-outline-primary.btn-auth {
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    background: transparent;
+}
+
+.btn-outline-primary.btn-auth:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-auth:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+/* ============================================
+   INDICADOR DE FUERZA DE CONTRASEÑA
+   ============================================ */
+.password-strength {
+    margin-top: -0.5rem;
+}
+
+.password-strength-bar {
+    height: 4px;
+    background-color: var(--bg-primary);
+    border-radius: var(--border-radius-sm);
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.password-strength-fill {
+    height: 100%;
+    width: 0%;
+    border-radius: var(--border-radius-sm);
+    transition: all var(--transition-base);
+    background: linear-gradient(90deg, var(--error-color), var(--warning-color), var(--success-color));
+}
+
+.password-strength-text {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+/* ============================================
+   DIVISOR
+   ============================================ */
+.auth-divider {
+    text-align: center;
+    margin: var(--spacing-xl) 0;
+    position: relative;
+}
+
+.auth-divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--border-color);
+}
+
+.auth-divider span {
+    position: relative;
+    background: var(--bg-secondary);
+    padding: 0 var(--spacing-md);
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+/* ============================================
+   ENLACES
+   ============================================ */
+.text-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color var(--transition-fast);
+}
+
+.text-link:hover {
+    color: var(--primary-hover);
+    text-decoration: underline;
+}
+
+/* ============================================
+   ALERTAS
+   ============================================ */
+.alert {
+    border-radius: var(--border-radius-lg);
+    border: none;
+    box-shadow: var(--shadow-lg);
+    padding: 1rem 1.25rem;
+    font-size: 0.9375rem;
+    max-width: 90%;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.alert-success {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+.alert-danger {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+.alert i {
+    font-size: 1.125rem;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 576px) {
+    .auth-card {
+        padding: var(--spacing-xl);
+        border-radius: var(--border-radius-xl);
+    }
+    
+    .auth-title {
+        font-size: 1.5rem;
+    }
+    
+    .auth-icon-wrapper {
+        width: 56px;
+        height: 56px;
+    }
+    
+    .auth-icon-wrapper i {
+        font-size: 1.75rem;
+    }
+}
+
+/* ============================================
+   UTILIDADES ADICIONALES
+   ============================================ */
+.btn-spinner {
+    display: inline-flex;
+    align-items: center;
+}
+
+.spinner-border-sm {
+    width: 1rem;
+    height: 1rem;
+    border-width: 0.15em;
+}
+
+/* Efecto de carga en botones */
+.btn-auth.loading .btn-text {
+    display: none;
+}
+
+.btn-auth.loading .btn-spinner {
+    display: inline-flex !important;
+}
+
+/* Animación de shake para errores */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+.shake {
+    animation: shake 0.5s;
+}
+
