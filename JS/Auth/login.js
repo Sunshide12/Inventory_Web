@@ -1,5 +1,7 @@
 import { iniciarSesion } from "./auth.js";
 
+console.log("Login.js cargado correctamente");
+
 const form = document.getElementById("loginForm");
 const email = document.getElementById("loginEmail");
 const password = document.getElementById("loginPassword");
@@ -62,40 +64,48 @@ form.addEventListener("submit", async (e) => {
     // Intentar iniciar sesión
     const result = await iniciarSesion(email.value.trim(), password.value);
 
-    if (result.success) {
-      // Guardar preferencia de "Recordarme" si está marcado
-      if (rememberMe.checked) {
-        localStorage.setItem("rememberMe", "true");
-        localStorage.setItem("userEmail", email.value.trim());
+    // if (result.success) {
+    //   // Guardar preferencia de "Recordarme" si está marcado
+    //   if (rememberMe.checked) {
+    //     localStorage.setItem("rememberMe", "true");
+    //     localStorage.setItem("userEmail", email.value.trim());
+    //   } else {
+    //     localStorage.removeItem("rememberMe");
+    //     localStorage.removeItem("userEmail");
+    //   }
+
+      // Mostrar información en consola ANTES de redirigir
+
+      console.warn("⚠️ Datos de la sesión", result.session);
+      console.warn("⚠️ Datos del usuario", result.user);
+
+      if (result.success) {
+        showSuccess("¡Inicio de sesión exitoso! Redirigiendo...");
+
+        
+        // Redirigir al dashboard después de 2 segundos (dar tiempo a ver los logs)
+        setTimeout(() => {
+          window.location.href = "../../Views/Dashboard/dashboard.html";
+        }, 2000);
       } else {
-        localStorage.removeItem("rememberMe");
-        localStorage.removeItem("userEmail");
+        // Mostrar error
+        showError(result.error || "Error al iniciar sesión");
+        
+        // Restaurar botón
+        btnText.classList.remove("d-none");
+        btnSpinner.classList.add("d-none");
+        submitBtn.disabled = false;
       }
-
-      showSuccess("¡Inicio de sesión exitoso! Redirigiendo...");
-
-      // Redirigir al dashboard después de 1 segundo
-      setTimeout(() => {
-        window.location.href = "../../Views/Dashboard/dashboard.html";
-      }, 1000);
-    } else {
+    } catch (error) {
       // Mostrar error
-      showError(result.error || "Error al iniciar sesión");
-      
+      showError(error.message || "Error al iniciar sesión");
+
       // Restaurar botón
       btnText.classList.remove("d-none");
       btnSpinner.classList.add("d-none");
       submitBtn.disabled = false;
     }
-  } catch (error) {
-    console.error("Error en el login:", error);
-    showError("Error al iniciar sesión: " + error.message);
-    
-    // Restaurar botón
-    btnText.classList.remove("d-none");
-    btnSpinner.classList.add("d-none");
-    submitBtn.disabled = false;
-  }
+
 });
 
 // -------------------------------------
@@ -121,10 +131,9 @@ function showError(msg) {
 document.addEventListener("DOMContentLoaded", () => {
   const rememberMeValue = localStorage.getItem("rememberMe");
   const savedEmail = localStorage.getItem("userEmail");
-  
+
   if (rememberMeValue === "true" && savedEmail) {
     email.value = savedEmail;
     rememberMe.checked = true;
   }
 });
-

@@ -150,7 +150,7 @@ form.addEventListener("submit", async (e) => {
 
     // Esperar 2.5 segundos y luego redirigir al login
     setTimeout(() => {
-      window.location.href = "login.html";
+      window.location.href = "login.html?registered=true";
     }, 2500);
   } else {
     showError(result.error);
