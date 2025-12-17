@@ -111,35 +111,6 @@
   <script type="module" src="../../JS/Config/supabaseClient.js"></script>
   <script type="module" src="../../JS/Auth/auth.js"></script>
   <script type="module" src="../../JS/Auth/login.js"></script>
-
-  <script>
-    // Verificar si viene del registro exitoso y mostrar mensaje
-    document.addEventListener("DOMContentLoaded", function () {
-      const urlParams = new URLSearchParams(window.location.search);
-      const registered = urlParams.get('registered');
-      
-      if (registered === 'true') {
-        const alert = document.getElementById('successAlert');
-        const messageEl = document.getElementById('successMessage');
-        if (alert && messageEl) {
-          messageEl.textContent = 'Por favor verifica tu correo electrónico para poder iniciar sesión. Revisa tu bandeja de entrada y spam.';
-          alert.style.display = 'block';
-          alert.classList.add('show');
-          
-          // Auto-ocultar después de 8 segundos
-          setTimeout(() => {
-            alert.classList.remove('show');
-            setTimeout(() => {
-              alert.style.display = 'none';
-            }, 300);
-          }, 8000);
-          
-          // Limpiar el parámetro de la URL
-          window.history.replaceState({}, document.title, window.location.pathname);
-        }
-      }
-    });
-  </script>
 </body>
 
 </html>
