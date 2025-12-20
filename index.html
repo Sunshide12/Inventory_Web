@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sistema de Inventario - Gestión Inteligente</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="CSS/landing.css" />
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
+</head>
+
+<body>
+  <!-- Hidden YouTube Audio Player -->
+  <iframe id="youtube-audio" style="display: none;"
+    src="https://www.youtube.com/embed/jowHGr8_2O4?autoplay=1&mute=0&loop=1&playlist=jowHGr8_2O4&start=22&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&enablejsapi=1"
+    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+  <!-- Music Control Panel -->
+  <div class="music-control-panel">
+    <button id="music-toggle" class="music-control-btn" onclick="toggleMusic()" title="Pausar/Reproducir música">
+      <i class="bi bi-pause-fill" id="music-icon"></i>
+    </button>
+    <div class="volume-control">
+      <video
+        src="Pitufo.mp4"
+        class="dancing-cat-gif"
+        id="dancingCatGif"
+        autoplay
+        loop
+        muted
+        playsinline
+      ></video>
+      <i class="bi bi-volume-up volume-icon"></i>
+      <input type="range" id="volume-slider" class="volume-slider" min="0" max="100" value="50"
+        oninput="setVolume(this.value)" title="Volumen" />
+    </div>
+  </div>
+
+  <!-- Animated Galaxy Background -->
+  <div class="galaxy-background">
+    <div class="stars"></div>
+    <div class="stars2"></div>
+    <div class="stars3"></div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="container">
+        <div class="row align-items-center min-vh-100">
+          <div class="col-lg-8 mx-auto text-center">
+            <div class="hero-content">
+              <div class="logo-animation mb-4">
+                <i class="bi bi-box-seam-fill"></i>
+              </div>
+              <h1 class="hero-title mb-4">
+                Sistema de <span class="gradient-text">Inventario</span>
+              </h1>
+              <p class="hero-subtitle mb-5">
+                Gestión inteligente y eficiente de tu inventario. Controla
+                productos, categorías y estadísticas en tiempo real con una
+                interfaz moderna y fácil de usar.
+              </p>
+              <a href="Views/Auth/login.html" class="btn btn-primary btn-lg cta-button">
+                <i class="bi bi-rocket-takeoff me-2"></i>
+                Comenzar Ahora
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section py-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 text-center mb-5">
+            <h2 class="section-title">Funcionalidades</h2>
+            <p class="section-subtitle">
+              Descubre todo lo que puedes hacer con nuestro sistema
+            </p>
+          </div>
+        </div>
+        <div class="row g-4">
+          <!-- Feature 1 -->
+          <div class="col-md-6 col-lg-4">
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class="bi bi-box-seam"></i>
+              </div>
+              <h3 class="feature-title">Gestión de Productos</h3>
+              <p class="feature-description">
+                Crea, edita y elimina productos con información detallada.
+                Controla stock, precios y categorías de manera intuitiva.
+              </p>
+            </div>
+          </div>
+
+          <!-- Feature 2 -->
+          <div class="col-md-6 col-lg-4">
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class="bi bi-tags"></i>
+              </div>
+              <h3 class="feature-title">Categorías</h3>
+              <p class="feature-description">
+                Organiza tus productos en categorías personalizadas para una
+                mejor gestión y búsqueda.
+              </p>
+            </div>
+          </div>
+
+          <!-- Feature 3 -->
+          <div class="col-md-6 col-lg-4">
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class="bi bi-graph-up-arrow"></i>
+              </div>
+              <h3 class="feature-title">Dashboard Estadístico</h3>
+              <p class="feature-description">
+                Visualiza estadísticas en tiempo real: total de productos,
+                valor del inventario y alertas de stock bajo.
+              </p>
+            </div>
+          </div>
+
+          <!-- Feature 4 -->
+          <div class="col-md-6 col-lg-4">
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class="bi bi-search"></i>
+              </div>
+              <h3 class="feature-title">Búsqueda Avanzada</h3>
+              <p class="feature-description">
+                Encuentra productos rápidamente por nombre, categoría o
+                descripción con búsqueda en tiempo real.
+              </p>
+            </div>
+          </div>
+
+          <!-- Feature 5 -->
+          <div class="col-md-6 col-lg-4">
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class="bi bi-pencil-square"></i>
+              </div>
+              <h3 class="feature-title">Edición Rápida</h3>
+              <p class="feature-description">
+                Actualiza el stock de productos directamente desde la tabla
+                con edición inline rápida y eficiente.
+              </p>
+            </div>
+          </div>
+
+          <!-- Feature 6 -->
+          <div class="col-md-6 col-lg-4">
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class="bi bi-shield-lock"></i>
+              </div>
+              <h3 class="feature-title">Seguridad</h3>
+              <p class="feature-description">
+                Autenticación segura con Supabase. Cada usuario gestiona su
+                propio inventario de forma privada.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Roadmap Section -->
+    <section class="roadmap-section py-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 text-center mb-5">
+            <h2 class="section-title">Estado del Proyecto</h2>
+            <p class="section-subtitle">
+              Versión Beta - Características implementadas y próximas
+              actualizaciones
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-10 mx-auto">
+            <!-- Tabs Navigation -->
+            <ul class="nav nav-pills justify-content-center mb-4 roadmap-tabs" id="roadmapTabs" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="implemented-tab" data-bs-toggle="pill" data-bs-target="#implemented"
+                  type="button" role="tab">
+                  <i class="bi bi-check-circle me-2"></i>
+                  Implementado
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pending-tab" data-bs-toggle="pill" data-bs-target="#pending" type="button"
+                  role="tab">
+                  <i class="bi bi-clock-history me-2"></i>
+                  Próximamente
+                </button>
+              </li>
+            </ul>
+
+            <!-- Tabs Content -->
+            <div class="tab-content" id="roadmapTabsContent">
+              <!-- Implemented Features -->
+              <div class="tab-pane fade show active" id="implemented" role="tabpanel">
+                <div class="roadmap-card">
+                  <h3 class="roadmap-card-title mb-4">
+                    <i class="bi bi-check-circle-fill text-success me-2"></i>
+                    Características Actuales
+                  </h3>
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <div class="roadmap-item implemented">
+                        <i class="bi bi-check-circle-fill"></i>
+                        <span>CRUD completo de productos</span>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="roadmap-item implemented">
+                        <i class="bi bi-check-circle-fill"></i>
+                        <span>CRUD completo de categorías</span>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="roadmap-item implemented">
+                        <i class="bi bi-check-circle-fill"></i>
+                        <span>Dashboard con estadísticas en tiempo real</span>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="roadmap-item implemented">
+                        <i class="bi bi-check-circle-fill"></i>
+                        <span>Búsqueda de productos en tiempo real</span>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="roadmap-item implemented">
+                        <i class="bi bi-check-circle-fill"></i>
+                        <span>Edición rápida de stock inline</span>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="roadmap-item implemented">
+                        <i class="bi bi-check-circle-fill"></i>
+                        <span>Autenticación segura con Supabase</span>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="roadmap-item implemented">
+                        <i class="bi bi-check-circle-fill"></i>
+                        <span>Sistema de cache para mejor rendimiento</span>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="roadmap-item implemented">
+                        <i class="bi bi-check-circle-fill"></i>
+                        <span>Alertas de stock bajo</span>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="roadmap-item implemented">
+                        <i class="bi bi-check-circle-fill"></i>
+                        <span>Interfaz responsive (móvil y desktop)</span>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="roadmap-item implemented">
+                        <i class="bi bi-check-circle-fill"></i>
+                        <span>Navegación SPA (Single Page Application)</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Pending Features -->
+              <div class="tab-pane fade" id="pending" role="tabpanel">
+                <div class="roadmap-card">
+                  <h3 class="roadmap-card-title mb-4">
+                    <i class="bi bi-clock-history text-warning me-2"></i>
+                    En Desarrollo
+                  </h3>
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <div class="roadmap-item pending">
+                        <i class="bi bi-hourglass-split"></i>
+                        <span>Historial de movimientos de inventario</span>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="roadmap-item pending">
+                        <i class="bi bi-hourglass-split"></i>
+                        <span>Exportar reportes a PDF/Excel</span>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="roadmap-item pending">
+                        <i class="bi bi-hourglass-split"></i>
+                        <span>Subir imágenes de productos</span>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="roadmap-item pending">
+                        <i class="bi bi-hourglass-split"></i>
+                        <span>Gestión de proveedores</span>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="roadmap-item pending">
+                        <i class="bi bi-hourglass-split"></i>
+                        <span>Gráficos y visualizaciones avanzadas</span>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="roadmap-item pending">
+                        <i class="bi bi-hourglass-split"></i>
+                        <span>Códigos de barras</span>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="roadmap-item pending">
+                        <i class="bi bi-hourglass-split"></i>
+                        <span>Múltiples almacenes/ubicaciones</span>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="roadmap-item pending">
+                        <i class="bi bi-hourglass-split"></i>
+                        <span>Entradas y salidas de productos</span>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="roadmap-item pending">
+                        <i class="bi bi-hourglass-split"></i>
+                        <span>Notificaciones por email</span>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="roadmap-item pending">
+                        <i class="bi bi-hourglass-split"></i>
+                        <span>Roles y permisos de usuario</span>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="roadmap-item pending">
+                        <i class="bi bi-hourglass-split"></i>
+                        <span>Importar/Exportar datos (CSV/Excel)</span>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="roadmap-item pending">
+                        <i class="bi bi-hourglass-split"></i>
+                        <span>Filtros avanzados de búsqueda</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section py-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto text-center">
+            <h2 class="cta-title mb-4">
+              ¿Listo para optimizar tu inventario?
+            </h2>
+            <p class="cta-subtitle mb-5">
+              Únete ahora y comienza a gestionar tu inventario de manera
+              profesional
+            </p>
+            <a href="Views/Auth/login.html" class="btn btn-primary btn-lg cta-button">
+              <i class="bi bi-arrow-right-circle me-2"></i>
+              Acceder al Sistema
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+          <p class="footer-text mb-0">
+            <i class="bi bi-code-slash me-2"></i>
+            Desarrollado con pasión por
+            <span class="footer-highlight">Sunshide</span>
+          </p>
+        </div>
+        <div class="col-md-6 text-center text-md-end">
+          <a href="https://github.com/Sunshide12" target="_blank" rel="noopener noreferrer" class="footer-link">
+            <i class="bi bi-github me-2"></i>
+            GitHub: Sunshide12
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- YouTube IFrame API Script -->
+  <script>
+    // YouTube IFrame API
+    var tag = document.createElement("script");
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName("script")[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    var player;
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player("youtube-audio", {
+        events: {
+          onReady: onPlayerReady,
+          onStateChange: onPlayerStateChange,
+        },
+      });
+    }
+
+    function onPlayerReady(event) {
+      // Posicionar el video en el segundo 27 y reproducir
+      event.target.seekTo(27, true);
+      // Establecer volumen inicial (50%)
+      event.target.setVolume(50);
+      event.target.playVideo();
+    }
+
+    function onPlayerStateChange(event) {
+      // Si el video termina, reiniciarlo desde el segundo 27 (loop)
+      if (event.data === YT.PlayerState.ENDED) {
+        event.target.seekTo(27, true);
+        event.target.playVideo();
+      }
+      // Actualizar icono del botón según el estado
+      updateMusicIcon(event.data);
+    }
+
+    // Función para pausar/reanudar música
+    function toggleMusic() {
+      if (player) {
+        const state = player.getPlayerState();
+        if (state === YT.PlayerState.PLAYING) {
+          player.pauseVideo();
+        } else {
+          player.playVideo();
+        }
+        // Mostrar barra de volumen temporalmente
+        showVolumeTemporarily();
+      }
+    }
+
+    // Mostrar barra de volumen temporalmente
+    function showVolumeTemporarily() {
+      const volumeControl = document.querySelector(".volume-control");
+      const panel = document.querySelector(".music-control-panel");
+      if (volumeControl && panel) {
+        volumeControl.classList.add("show");
+        panel.classList.add("has-volume");
+        // Ocultar después de 3 segundos
+        setTimeout(() => {
+          volumeControl.classList.remove("show");
+          panel.classList.remove("has-volume");
+        }, 3000);
+      }
+    }
+
+    // Actualizar icono según el estado
+    function updateMusicIcon(state) {
+      const icon = document.getElementById("music-icon");
+      if (icon) {
+        if (state === YT.PlayerState.PLAYING) {
+          icon.className = "bi bi-pause-fill";
+        } else {
+          icon.className = "bi bi-play-fill";
+        }
+      }
+    }
+
+    // Función para establecer el volumen
+    function setVolume(volume) {
+      if (player) {
+        player.setVolume(parseInt(volume, 10));
+        updateVolumeIcon(volume);
+      }
+    }
+
+    // Actualizar icono de volumen según el nivel
+    function updateVolumeIcon(volume) {
+      const volumeIcon = document.querySelector(".volume-icon");
+      if (volumeIcon) {
+        const vol = parseInt(volume, 10);
+        if (vol === 0) {
+          volumeIcon.className = "bi bi-volume-mute volume-icon";
+        } else if (vol < 50) {
+          volumeIcon.className = "bi bi-volume-down volume-icon";
+        } else {
+          volumeIcon.className = "bi bi-volume-up volume-icon";
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>

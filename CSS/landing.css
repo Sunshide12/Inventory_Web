@@ -1,0 +1,642 @@
+/* Landing Page Styles - Galaxy Theme */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #ffffff;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Galaxy Background Animation */
+.galaxy-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    #0a0e27 0%,
+    #1a1a3e 25%,
+    #2d1b4e 50%,
+    #1a1a3e 75%,
+    #0a0e27 100%
+  );
+  z-index: -1;
+  overflow: hidden;
+}
+
+/* Stars Animation */
+.stars,
+.stars2,
+.stars3 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+}
+
+.stars {
+  background-image: radial-gradient(
+      2px 2px at 20% 30%,
+      #ffffff,
+      transparent
+    ),
+    radial-gradient(2px 2px at 60% 70%, #ffffff, transparent),
+    radial-gradient(1px 1px at 50% 50%, #ffffff, transparent),
+    radial-gradient(1px 1px at 80% 10%, #ffffff, transparent),
+    radial-gradient(2px 2px at 90% 40%, #ffffff, transparent),
+    radial-gradient(1px 1px at 33% 60%, #ffffff, transparent),
+    radial-gradient(1px 1px at 55% 80%, #ffffff, transparent);
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  animation: sparkle 20s linear infinite;
+  opacity: 0.8;
+}
+
+.stars2 {
+  background-image: radial-gradient(
+      1px 1px at 40% 20%,
+      #ffffff,
+      transparent
+    ),
+    radial-gradient(1px 1px at 70% 60%, #ffffff, transparent),
+    radial-gradient(2px 2px at 30% 80%, #ffffff, transparent),
+    radial-gradient(1px 1px at 10% 50%, #ffffff, transparent),
+    radial-gradient(1px 1px at 90% 90%, #ffffff, transparent);
+  background-repeat: repeat;
+  background-size: 300px 300px;
+  animation: sparkle 25s linear infinite reverse;
+  opacity: 0.6;
+}
+
+.stars3 {
+  background-image: radial-gradient(
+      1px 1px at 15% 40%,
+      #a8d8ff,
+      transparent
+    ),
+    radial-gradient(1px 1px at 85% 30%, #a8d8ff, transparent),
+    radial-gradient(1px 1px at 50% 70%, #a8d8ff, transparent);
+  background-repeat: repeat;
+  background-size: 400px 400px;
+  animation: sparkle 30s linear infinite;
+  opacity: 0.4;
+}
+
+@keyframes sparkle {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-200px);
+  }
+}
+
+/* Main Content */
+.main-content {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.hero-section {
+  padding: 100px 0;
+  position: relative;
+}
+
+.hero-content {
+  animation: fadeInUp 1s ease-out;
+}
+
+.logo-animation {
+  display: inline-block;
+  animation: float 3s ease-in-out infinite;
+}
+
+.logo-animation i {
+  font-size: 80px;
+  color: #4a9eff;
+  text-shadow: 0 0 20px rgba(74, 158, 255, 0.5),
+    0 0 40px rgba(74, 158, 255, 0.3);
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-title {
+  font-size: 4rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #4a9eff 0%, #7b68ee 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-subtitle {
+  font-size: 1.3rem;
+  color: #b8c5d6;
+  line-height: 1.8;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.cta-button {
+  padding: 15px 40px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 50px;
+  background: linear-gradient(135deg, #4a9eff 0%, #7b68ee 100%);
+  border: none;
+  box-shadow: 0 10px 30px rgba(74, 158, 255, 0.4);
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.cta-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(74, 158, 255, 0.6);
+  background: linear-gradient(135deg, #5aaeff 0%, #8b78ff 100%);
+  color: #ffffff;
+}
+
+.cta-button:active {
+  transform: translateY(-1px);
+}
+
+/* Features Section */
+.features-section {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #ffffff;
+}
+
+.section-subtitle {
+  font-size: 1.1rem;
+  color: #b8c5d6;
+}
+
+.feature-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 30px;
+  height: 100%;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(74, 158, 255, 0.1) 0%,
+    rgba(123, 104, 238, 0.1) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-10px);
+  border-color: rgba(74, 158, 255, 0.5);
+  box-shadow: 0 10px 30px rgba(74, 158, 255, 0.2);
+}
+
+.feature-card:hover::before {
+  opacity: 1;
+}
+
+.feature-icon {
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, #4a9eff 0%, #7b68ee 100%);
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  font-size: 2rem;
+  color: #ffffff;
+  box-shadow: 0 5px 15px rgba(74, 158, 255, 0.3);
+}
+
+.feature-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #ffffff;
+  position: relative;
+  z-index: 1;
+}
+
+.feature-description {
+  color: #b8c5d6;
+  line-height: 1.7;
+  position: relative;
+  z-index: 1;
+}
+
+/* Roadmap Section */
+.roadmap-section {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.roadmap-tabs {
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 10px;
+}
+
+.roadmap-tabs .nav-link {
+  color: #b8c5d6;
+  background: transparent;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 30px;
+  margin: 0 10px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.roadmap-tabs .nav-link:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.roadmap-tabs .nav-link.active {
+  color: #ffffff;
+  background: linear-gradient(135deg, #4a9eff 0%, #7b68ee 100%);
+  box-shadow: 0 5px 15px rgba(74, 158, 255, 0.3);
+}
+
+.roadmap-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 40px;
+  margin-top: 30px;
+}
+
+.roadmap-card-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+}
+
+.roadmap-item {
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  margin-bottom: 10px;
+}
+
+.roadmap-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateX(5px);
+  border-color: rgba(74, 158, 255, 0.3);
+}
+
+.roadmap-item i {
+  font-size: 1.2rem;
+  margin-right: 12px;
+  min-width: 24px;
+}
+
+.roadmap-item.implemented {
+  color: #b8c5d6;
+}
+
+.roadmap-item.implemented i {
+  color: #28a745;
+}
+
+.roadmap-item.pending {
+  color: #b8c5d6;
+}
+
+.roadmap-item.pending i {
+  color: #ffc107;
+}
+
+.roadmap-item span {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* CTA Section */
+.cta-section {
+  padding: 80px 0;
+}
+
+.cta-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.cta-subtitle {
+  font-size: 1.2rem;
+  color: #b8c5d6;
+}
+
+/* Music Control Panel */
+.music-control-panel {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  padding: 10px;
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  min-width: 70px;
+}
+
+.music-control-panel:hover,
+.music-control-panel.has-volume {
+  justify-content: flex-start;
+  gap: 15px;
+  padding: 10px 15px;
+}
+
+.music-control-panel:hover .volume-control,
+.music-control-panel.has-volume .volume-control {
+  opacity: 1;
+  max-width: 150px;
+  visibility: visible;
+}
+
+.music-control-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4a9eff 0%, #7b68ee 100%);
+  border: none;
+  color: #ffffff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(74, 158, 255, 0.4);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.music-control-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 20px rgba(74, 158, 255, 0.6);
+  background: linear-gradient(135deg, #5aaeff 0%, #8b78ff 100%);
+}
+
+.music-control-btn:active {
+  transform: scale(0.95);
+}
+
+.volume-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  max-width: 0;
+  visibility: hidden;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.dancing-cat-gif {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  flex-shrink: 0;
+  border: none;
+  pointer-events: none;
+  object-fit: cover;
+  background: transparent;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.volume-control.show {
+  opacity: 1;
+  max-width: 150px;
+  visibility: visible;
+}
+
+.volume-icon {
+  font-size: 1.2rem;
+  color: #ffffff;
+  min-width: 20px;
+}
+
+.volume-slider {
+  width: 100px;
+  height: 5px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.2);
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4a9eff 0%, #7b68ee 100%);
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(74, 158, 255, 0.4);
+  transition: all 0.3s ease;
+}
+
+.volume-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 3px 8px rgba(74, 158, 255, 0.6);
+}
+
+.volume-slider::-moz-range-thumb {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4a9eff 0%, #7b68ee 100%);
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 5px rgba(74, 158, 255, 0.4);
+  transition: all 0.3s ease;
+}
+
+.volume-slider::-moz-range-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 3px 8px rgba(74, 158, 255, 0.6);
+}
+
+/* Footer */
+.footer {
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 30px 0;
+  position: relative;
+  z-index: 1;
+}
+
+.footer-text {
+  color: #b8c5d6;
+  font-size: 0.95rem;
+}
+
+.footer-highlight {
+  color: #4a9eff;
+  font-weight: 600;
+}
+
+.footer-link {
+  color: #b8c5d6;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+}
+
+.footer-link:hover {
+  color: #4a9eff;
+  transform: translateX(5px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.5rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.1rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .cta-title {
+    font-size: 2rem;
+  }
+
+  .logo-animation i {
+    font-size: 60px;
+  }
+
+  .feature-card {
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .cta-button {
+    padding: 12px 30px;
+    font-size: 1rem;
+  }
+
+  .music-control-panel {
+    bottom: 20px;
+    right: 20px;
+    padding: 8px 12px;
+    gap: 10px;
+  }
+
+  .music-control-btn {
+    width: 45px;
+    height: 45px;
+    font-size: 1rem;
+  }
+
+  .volume-slider {
+    width: 80px;
+  }
+
+  .volume-icon {
+    font-size: 1rem;
+  }
+}
