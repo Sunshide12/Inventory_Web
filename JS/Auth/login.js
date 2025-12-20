@@ -76,8 +76,8 @@ form.addEventListener("submit", async (e) => {
 
       // Mostrar información en consola ANTES de redirigir
 
-      console.warn("⚠️ Datos de la sesión", result.session);
-      console.warn("⚠️ Datos del usuario", result.user);
+      // console.warn("⚠️ Datos de la sesión", result.session);
+      // console.warn("⚠️ Datos del usuario", result.user);
 
       if (result.success) {
         showSuccess("¡Inicio de sesión exitoso! Redirigiendo...");

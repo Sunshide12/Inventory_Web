@@ -91,4 +91,24 @@ export async function obtenerSesion() {
       return { success: false, error: error.message, user: null, session: null };
     }
 }
+
+// Función para cerrar sesión
+export async function cerrarSesion() {
+  try {
+    console.log("🔓 Cerrando sesión...");
+    const { error } = await supabase.auth.signOut();
+    
+    if (error) {
+      console.error("❌ Error al cerrar sesión:", error);
+      return { success: false, error: error.message };
+    }
+    
+    console.log("✅ Sesión cerrada exitosamente");
+    return { success: true };
+  } catch (error) {
+    console.error("❌ Excepción al cerrar sesión:", error);
+    return { success: false, error: error.message || "Error desconocido al cerrar sesión" };
+  }
+}
+
 console.log("Supabase client cargado correctamente");
