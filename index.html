@@ -16,31 +16,7 @@
 </head>
 
 <body>
-  <!-- Hidden YouTube Audio Player -->
-  <iframe id="youtube-audio" style="display: none;"
-    src="https://www.youtube.com/embed/jowHGr8_2O4?autoplay=1&mute=0&loop=1&playlist=jowHGr8_2O4&start=22&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&enablejsapi=1"
-    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
-  <!-- Music Control Panel -->
-  <div class="music-control-panel">
-    <button id="music-toggle" class="music-control-btn" onclick="toggleMusic()" title="Pausar/Reproducir música">
-      <i class="bi bi-pause-fill" id="music-icon"></i>
-    </button>
-    <div class="volume-control">
-      <video
-        src="Pitufo.mp4"
-        class="dancing-cat-gif"
-        id="dancingCatGif"
-        autoplay
-        loop
-        muted
-        playsinline
-      ></video>
-      <i class="bi bi-volume-up volume-icon"></i>
-      <input type="range" id="volume-slider" class="volume-slider" min="0" max="100" value="50"
-        oninput="setVolume(this.value)" title="Volumen" />
-    </div>
-  </div>
 
   <!-- Animated Galaxy Background -->
   <div class="galaxy-background">
@@ -415,106 +391,6 @@
     </div>
   </footer>
 
-  <!-- YouTube IFrame API Script -->
-  <script>
-    // YouTube IFrame API
-    var tag = document.createElement("script");
-    tag.src = "https://www.youtube.com/iframe_api";
-    var firstScriptTag = document.getElementsByTagName("script")[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-    var player;
-    function onYouTubeIframeAPIReady() {
-      player = new YT.Player("youtube-audio", {
-        events: {
-          onReady: onPlayerReady,
-          onStateChange: onPlayerStateChange,
-        },
-      });
-    }
-
-    function onPlayerReady(event) {
-      // Posicionar el video en el segundo 27 y reproducir
-      event.target.seekTo(27, true);
-      // Establecer volumen inicial (50%)
-      event.target.setVolume(50);
-      event.target.playVideo();
-    }
-
-    function onPlayerStateChange(event) {
-      // Si el video termina, reiniciarlo desde el segundo 27 (loop)
-      if (event.data === YT.PlayerState.ENDED) {
-        event.target.seekTo(27, true);
-        event.target.playVideo();
-      }
-      // Actualizar icono del botón según el estado
-      updateMusicIcon(event.data);
-    }
-
-    // Función para pausar/reanudar música
-    function toggleMusic() {
-      if (player) {
-        const state = player.getPlayerState();
-        if (state === YT.PlayerState.PLAYING) {
-          player.pauseVideo();
-        } else {
-          player.playVideo();
-        }
-        // Mostrar barra de volumen temporalmente
-        showVolumeTemporarily();
-      }
-    }
-
-    // Mostrar barra de volumen temporalmente
-    function showVolumeTemporarily() {
-      const volumeControl = document.querySelector(".volume-control");
-      const panel = document.querySelector(".music-control-panel");
-      if (volumeControl && panel) {
-        volumeControl.classList.add("show");
-        panel.classList.add("has-volume");
-        // Ocultar después de 3 segundos
-        setTimeout(() => {
-          volumeControl.classList.remove("show");
-          panel.classList.remove("has-volume");
-        }, 3000);
-      }
-    }
-
-    // Actualizar icono según el estado
-    function updateMusicIcon(state) {
-      const icon = document.getElementById("music-icon");
-      if (icon) {
-        if (state === YT.PlayerState.PLAYING) {
-          icon.className = "bi bi-pause-fill";
-        } else {
-          icon.className = "bi bi-play-fill";
-        }
-      }
-    }
-
-    // Función para establecer el volumen
-    function setVolume(volume) {
-      if (player) {
-        player.setVolume(parseInt(volume, 10));
-        updateVolumeIcon(volume);
-      }
-    }
-
-    // Actualizar icono de volumen según el nivel
-    function updateVolumeIcon(volume) {
-      const volumeIcon = document.querySelector(".volume-icon");
-      if (volumeIcon) {
-        const vol = parseInt(volume, 10);
-        if (vol === 0) {
-          volumeIcon.className = "bi bi-volume-mute volume-icon";
-        } else if (vol < 50) {
-          volumeIcon.className = "bi bi-volume-down volume-icon";
-        } else {
-          volumeIcon.className = "bi bi-volume-up volume-icon";
-        }
-      }
-    }
-  </script>
 </body>
 
 </html>
