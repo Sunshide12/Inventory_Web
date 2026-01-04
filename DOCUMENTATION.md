@@ -2,28 +2,34 @@
 
 ## Table of Contents
 
-1. [Project Overview](#project-overview)
-2. [Architecture](#architecture)
-3. [Technology Stack](#technology-stack)
-4. [Project Structure](#project-structure)
-5. [Installation & Setup](#installation--setup)
-6. [Configuration](#configuration)
-7. [Authentication System](#authentication-system)
-8. [Dashboard Module](#dashboard-module)
-9. [Product Management](#product-management)
-10. [Category Management](#category-management)
-11. [Database Schema](#database-schema)
-12. [API Integration](#api-integration)
-13. [User Interface](#user-interface)
-14. [State Management](#state-management)
-15. [Performance Optimization](#performance-optimization)
-16. [Security](#security)
-17. [Error Handling](#error-handling)
-18. [Testing](#testing)
-19. [Deployment](#deployment)
-20. [Troubleshooting](#troubleshooting)
-21. [Future Enhancements](#future-enhancements)
-22. [Contributing](#contributing)
+This project is a modern web application designed for real-time inventory management, implemented as a Single Page Application (SPA).  
+It focuses on delivering an efficient and intuitive user experience while ensuring secure data handling, proper user isolation, and scalability.  
+
+The system enables authenticated users to manage products and categories through a centralized dashboard, providing real-time statistics and optimized data operations supported by a robust backend infrastructure.
+
+. 
+5. [Architecture](#architecture)
+The architecture is based on SPA, which allows users to view all necessary content built with JavaScript by connecting to the Supabase API for user management and the product database.
+6. [Technology Stack](#technology-stack)
+7. [Project Structure](#project-structure)
+8. [Installation & Setup](#installation--setup)
+9. [Configuration](#configuration)
+10. [Authentication System](#authentication-system)
+11. [Dashboard Module](#dashboard-module)
+12. [Product Management](#product-management)
+13. [Category Management](#category-management)
+14. [Database Schema](#database-schema)
+15. [API Integration](#api-integration)
+16. [User Interface](#user-interface)
+17. [State Management](#state-management)
+18. [Performance Optimization](#performance-optimization)
+19. [Security](#security)
+20. [Error Handling](#error-handling)
+21. [Testing](#testing)
+22. [Deployment](#deployment)
+23. [Troubleshooting](#troubleshooting)
+24. [Future Enhancements](#future-enhancements)
+25. [Contributing](#contributing)
 
 ---
 
