@@ -8,8 +8,34 @@ export async function registroUsuario(username, password, email, phone) {
     console.log("Registro de usuario", username, password, email, phone);
     
     // Configurar URL de redirección después de confirmar email
+    // Funciona tanto en desarrollo como en producción (Vercel)
     const baseUrl = window.location.origin;
-    const redirectUrl = `${baseUrl}/Views/Auth/verificado.html`;
+    const currentPath = window.location.pathname;
+    
+    // Determinar la ruta base del proyecto
+    let projectRoot = '';
+    if (currentPath.includes('/Views/Auth/')) {
+      projectRoot = currentPath.substring(0, currentPath.indexOf('/Views/'));
+    } else if (currentPath.includes('/Views/')) {
+      projectRoot = currentPath.substring(0, currentPath.indexOf('/Views/'));
+    }
+    
+    // Si projectRoot está vacío, usar '/'
+    if (!projectRoot || projectRoot === '') {
+      projectRoot = '/';
+    }
+    
+    // Asegurar que projectRoot termine con '/' si no está vacío
+    if (projectRoot !== '/' && !projectRoot.endsWith('/')) {
+      projectRoot += '/';
+    }
+    
+    // Construir URL completa de redirección
+    const redirectUrl = `${baseUrl}${projectRoot}Views/Auth/verificado.html`;
+    
+    console.log("🔗 URL de redirección configurada:", redirectUrl);
+    console.log("📍 Base URL:", baseUrl);
+    console.log("📁 Project Root:", projectRoot);
     
     const { data, error } = await supabase.auth.signUp({
       email: email,
