@@ -387,6 +387,12 @@ body {
 .roadmap-item span {
   font-size: 1rem;
   line-height: 1.5;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+  flex: 1;
+  min-width: 0;
 }
 
 /* CTA Section */
@@ -723,6 +729,7 @@ body {
     font-size: 0.85rem;
     min-height: 55px;
     height: 100%;
+    overflow: hidden;
   }
 
   .roadmap-item i {
@@ -734,6 +741,12 @@ body {
   .roadmap-item span {
     font-size: 0.85rem;
     line-height: 1.4;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    flex: 1;
+    min-width: 0;
   }
 
   .hero-title {
