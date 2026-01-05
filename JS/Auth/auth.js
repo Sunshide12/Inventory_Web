@@ -6,10 +6,18 @@ import { supabase } from "../Config/supabaseClient.js";
 export async function registroUsuario(username, password, email, phone) {
   try {
     console.log("Registro de usuario", username, password, email, phone);
+    
+    // Configurar URL de redirección después de confirmar email
+    const baseUrl = window.location.origin;
+    const redirectUrl = `${baseUrl}/Views/Auth/verificado.html`;
+    
     const { data, error } = await supabase.auth.signUp({
       email: email,
       password: password,
-      user_metadata: {
+      options: {
+        emailRedirectTo: redirectUrl
+      },
+      data: {
         username: username,
         phone: phone,
       },
@@ -18,6 +26,32 @@ export async function registroUsuario(username, password, email, phone) {
     if (error) {
       console.error("Error al registrar usuario:", error);
       return { success: false, error: error.message };
+    }
+
+    // Si el usuario se creó exitosamente, crear su perfil en la tabla profiles
+    if (data.user) {
+      try {
+        const { error: profileError } = await supabase
+          .from("profiles")
+          .insert({
+            id: data.user.id, // Usar el mismo ID del usuario de auth
+            username: username,
+            email: email,
+            phone: phone,
+            full_name: username, // Usar username como nombre completo por defecto
+          });
+
+        if (profileError) {
+          console.error("Error al crear perfil:", profileError);
+          // No retornar error aquí, el usuario ya está creado en auth
+          // Solo loguear el error para debugging
+        } else {
+          console.log("✅ Perfil creado exitosamente en la tabla profiles");
+        }
+      } catch (profileError) {
+        console.error("Excepción al crear perfil:", profileError);
+        // Continuar aunque falle, el usuario ya está en auth
+      }
     }
 
     return { success: true };
