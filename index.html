@@ -13,10 +13,16 @@
   <link rel="stylesheet" href="CSS/landing.css" />
   <!-- Bootstrap JS Bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
+  <!-- Language Switcher -->
+  <script type="module" src="JS/landing/language.js"></script>
 </head>
 
 <body>
 
+  <!-- Language Toggle Button -->
+  <button id="language-toggle" class="language-toggle-btn" aria-label="Toggle language">
+    EN
+  </button>
 
   <!-- Animated Galaxy Background -->
   <div class="galaxy-background">
@@ -37,16 +43,16 @@
                 <i class="bi bi-box-seam-fill"></i>
               </div>
               <h1 class="hero-title mb-4">
-                Sistema de <span class="gradient-text">Inventario</span>
+                <span data-i18n="hero-title-1">Sistema de</span> <span class="gradient-text" data-i18n="hero-title-2">Inventario</span>
               </h1>
-              <p class="hero-subtitle mb-5">
+              <p class="hero-subtitle mb-5" data-i18n="hero-subtitle">
                 Gestión inteligente y eficiente de tu inventario. Controla
                 productos, categorías y estadísticas en tiempo real con una
                 interfaz moderna y fácil de usar.
               </p>
               <a href="Views/Auth/login.html" class="btn btn-primary btn-lg cta-button">
                 <i class="bi bi-rocket-takeoff me-2"></i>
-                Comenzar Ahora
+                <span data-i18n="hero-cta">Comenzar Ahora</span>
               </a>
             </div>
           </div>
@@ -59,21 +65,21 @@
       <div class="container">
         <div class="row">
           <div class="col-12 text-center mb-5">
-            <h2 class="section-title">Funcionalidades</h2>
-            <p class="section-subtitle">
+            <h2 class="section-title" data-i18n="features-title">Funcionalidades</h2>
+            <p class="section-subtitle" data-i18n="features-subtitle">
               Descubre todo lo que puedes hacer con nuestro sistema
             </p>
           </div>
         </div>
         <div class="row g-4">
           <!-- Feature 1 -->
-          <div class="col-md-6 col-lg-4">
+          <div class="col-6 col-md-6 col-lg-4">
             <div class="feature-card">
               <div class="feature-icon">
                 <i class="bi bi-box-seam"></i>
               </div>
-              <h3 class="feature-title">Gestión de Productos</h3>
-              <p class="feature-description">
+              <h3 class="feature-title" data-i18n="feature-1-title">Gestión de Productos</h3>
+              <p class="feature-description" data-i18n="feature-1-desc">
                 Crea, edita y elimina productos con información detallada.
                 Controla stock, precios y categorías de manera intuitiva.
               </p>
@@ -81,13 +87,13 @@
           </div>
 
           <!-- Feature 2 -->
-          <div class="col-md-6 col-lg-4">
+          <div class="col-6 col-md-6 col-lg-4">
             <div class="feature-card">
               <div class="feature-icon">
                 <i class="bi bi-tags"></i>
               </div>
-              <h3 class="feature-title">Categorías</h3>
-              <p class="feature-description">
+              <h3 class="feature-title" data-i18n="feature-2-title">Categorías</h3>
+              <p class="feature-description" data-i18n="feature-2-desc">
                 Organiza tus productos en categorías personalizadas para una
                 mejor gestión y búsqueda.
               </p>
@@ -95,13 +101,13 @@
           </div>
 
           <!-- Feature 3 -->
-          <div class="col-md-6 col-lg-4">
+          <div class="col-6 col-md-6 col-lg-4">
             <div class="feature-card">
               <div class="feature-icon">
                 <i class="bi bi-graph-up-arrow"></i>
               </div>
-              <h3 class="feature-title">Dashboard Estadístico</h3>
-              <p class="feature-description">
+              <h3 class="feature-title" data-i18n="feature-3-title">Dashboard Estadístico</h3>
+              <p class="feature-description" data-i18n="feature-3-desc">
                 Visualiza estadísticas en tiempo real: total de productos,
                 valor del inventario y alertas de stock bajo.
               </p>
@@ -109,13 +115,13 @@
           </div>
 
           <!-- Feature 4 -->
-          <div class="col-md-6 col-lg-4">
+          <div class="col-6 col-md-6 col-lg-4">
             <div class="feature-card">
               <div class="feature-icon">
                 <i class="bi bi-search"></i>
               </div>
-              <h3 class="feature-title">Búsqueda Avanzada</h3>
-              <p class="feature-description">
+              <h3 class="feature-title" data-i18n="feature-4-title">Búsqueda Avanzada</h3>
+              <p class="feature-description" data-i18n="feature-4-desc">
                 Encuentra productos rápidamente por nombre, categoría o
                 descripción con búsqueda en tiempo real.
               </p>
@@ -123,13 +129,13 @@
           </div>
 
           <!-- Feature 5 -->
-          <div class="col-md-6 col-lg-4">
+          <div class="col-6 col-md-6 col-lg-4">
             <div class="feature-card">
               <div class="feature-icon">
                 <i class="bi bi-pencil-square"></i>
               </div>
-              <h3 class="feature-title">Edición Rápida</h3>
-              <p class="feature-description">
+              <h3 class="feature-title" data-i18n="feature-5-title">Edición Rápida</h3>
+              <p class="feature-description" data-i18n="feature-5-desc">
                 Actualiza el stock de productos directamente desde la tabla
                 con edición inline rápida y eficiente.
               </p>
@@ -137,13 +143,13 @@
           </div>
 
           <!-- Feature 6 -->
-          <div class="col-md-6 col-lg-4">
+          <div class="col-6 col-md-6 col-lg-4">
             <div class="feature-card">
               <div class="feature-icon">
                 <i class="bi bi-shield-lock"></i>
               </div>
-              <h3 class="feature-title">Seguridad</h3>
-              <p class="feature-description">
+              <h3 class="feature-title" data-i18n="feature-6-title">Seguridad</h3>
+              <p class="feature-description" data-i18n="feature-6-desc">
                 Autenticación segura con Supabase. Cada usuario gestiona su
                 propio inventario de forma privada.
               </p>
@@ -158,8 +164,8 @@
       <div class="container">
         <div class="row">
           <div class="col-12 text-center mb-5">
-            <h2 class="section-title">Estado del Proyecto</h2>
-            <p class="section-subtitle">
+            <h2 class="section-title" data-i18n="roadmap-title">Estado del Proyecto</h2>
+            <p class="section-subtitle" data-i18n="roadmap-subtitle">
               Versión Beta - Características implementadas y próximas
               actualizaciones
             </p>
@@ -173,14 +179,14 @@
                 <button class="nav-link active" id="implemented-tab" data-bs-toggle="pill" data-bs-target="#implemented"
                   type="button" role="tab">
                   <i class="bi bi-check-circle me-2"></i>
-                  Implementado
+                  <span data-i18n="roadmap-tab-implemented">Implementado</span>
                 </button>
               </li>
               <li class="nav-item" role="presentation">
                 <button class="nav-link" id="pending-tab" data-bs-toggle="pill" data-bs-target="#pending" type="button"
                   role="tab">
                   <i class="bi bi-clock-history me-2"></i>
-                  Próximamente
+                  <span data-i18n="roadmap-tab-pending">Próximamente</span>
                 </button>
               </li>
             </ul>
@@ -192,67 +198,67 @@
                 <div class="roadmap-card">
                   <h3 class="roadmap-card-title mb-4">
                     <i class="bi bi-check-circle-fill text-success me-2"></i>
-                    Características Actuales
+                    <span data-i18n="roadmap-implemented-title">Características Actuales</span>
                   </h3>
                   <div class="row g-3">
-                    <div class="col-md-6">
+                    <div class="col-6 col-md-6">
                       <div class="roadmap-item implemented">
                         <i class="bi bi-check-circle-fill"></i>
-                        <span>CRUD completo de productos</span>
+                        <span data-i18n="roadmap-impl-1">CRUD completo de productos</span>
                       </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-6 col-md-6">
                       <div class="roadmap-item implemented">
                         <i class="bi bi-check-circle-fill"></i>
-                        <span>CRUD completo de categorías</span>
+                        <span data-i18n="roadmap-impl-2">CRUD completo de categorías</span>
                       </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-6 col-md-6">
                       <div class="roadmap-item implemented">
                         <i class="bi bi-check-circle-fill"></i>
-                        <span>Dashboard con estadísticas en tiempo real</span>
+                        <span data-i18n="roadmap-impl-3">Dashboard con estadísticas en tiempo real</span>
                       </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-6 col-md-6">
                       <div class="roadmap-item implemented">
                         <i class="bi bi-check-circle-fill"></i>
-                        <span>Búsqueda de productos en tiempo real</span>
+                        <span data-i18n="roadmap-impl-4">Búsqueda de productos en tiempo real</span>
                       </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-6 col-md-6">
                       <div class="roadmap-item implemented">
                         <i class="bi bi-check-circle-fill"></i>
-                        <span>Edición rápida de stock inline</span>
+                        <span data-i18n="roadmap-impl-5">Edición rápida de stock inline</span>
                       </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-6 col-md-6">
                       <div class="roadmap-item implemented">
                         <i class="bi bi-check-circle-fill"></i>
-                        <span>Autenticación segura con Supabase</span>
+                        <span data-i18n="roadmap-impl-6">Autenticación segura con Supabase</span>
                       </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-6 col-md-6">
                       <div class="roadmap-item implemented">
                         <i class="bi bi-check-circle-fill"></i>
-                        <span>Sistema de cache para mejor rendimiento</span>
+                        <span data-i18n="roadmap-impl-7">Sistema de cache para mejor rendimiento</span>
                       </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-6 col-md-6">
                       <div class="roadmap-item implemented">
                         <i class="bi bi-check-circle-fill"></i>
-                        <span>Alertas de stock bajo</span>
+                        <span data-i18n="roadmap-impl-8">Alertas de stock bajo</span>
                       </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-6 col-md-6">
                       <div class="roadmap-item implemented">
                         <i class="bi bi-check-circle-fill"></i>
-                        <span>Interfaz responsive (móvil y desktop)</span>
+                        <span data-i18n="roadmap-impl-9">Interfaz responsive (móvil y desktop)</span>
                       </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-6 col-md-6">
                       <div class="roadmap-item implemented">
                         <i class="bi bi-check-circle-fill"></i>
-                        <span>Navegación SPA (Single Page Application)</span>
+                        <span data-i18n="roadmap-impl-10">Navegación SPA (Single Page Application)</span>
                       </div>
                     </div>
                   </div>
@@ -264,79 +270,79 @@
                 <div class="roadmap-card">
                   <h3 class="roadmap-card-title mb-4">
                     <i class="bi bi-clock-history text-warning me-2"></i>
-                    En Desarrollo
+                    <span data-i18n="roadmap-pending-title">En Desarrollo</span>
                   </h3>
                   <div class="row g-3">
-                    <div class="col-md-6">
+                    <div class="col-6 col-md-6">
                       <div class="roadmap-item pending">
                         <i class="bi bi-hourglass-split"></i>
-                        <span>Historial de movimientos de inventario</span>
+                        <span data-i18n="roadmap-pend-1">Historial de movimientos de inventario</span>
                       </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-6 col-md-6">
                       <div class="roadmap-item pending">
                         <i class="bi bi-hourglass-split"></i>
-                        <span>Exportar reportes a PDF/Excel</span>
+                        <span data-i18n="roadmap-pend-2">Exportar reportes a PDF/Excel</span>
                       </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-6 col-md-6">
                       <div class="roadmap-item pending">
                         <i class="bi bi-hourglass-split"></i>
-                        <span>Subir imágenes de productos</span>
+                        <span data-i18n="roadmap-pend-3">Subir imágenes de productos</span>
                       </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-6 col-md-6">
                       <div class="roadmap-item pending">
                         <i class="bi bi-hourglass-split"></i>
-                        <span>Gestión de proveedores</span>
+                        <span data-i18n="roadmap-pend-4">Gestión de proveedores</span>
                       </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-6 col-md-6">
                       <div class="roadmap-item pending">
                         <i class="bi bi-hourglass-split"></i>
-                        <span>Gráficos y visualizaciones avanzadas</span>
+                        <span data-i18n="roadmap-pend-5">Gráficos y visualizaciones avanzadas</span>
                       </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-6 col-md-6">
                       <div class="roadmap-item pending">
                         <i class="bi bi-hourglass-split"></i>
-                        <span>Códigos de barras</span>
+                        <span data-i18n="roadmap-pend-6">Códigos de barras</span>
                       </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-6 col-md-6">
                       <div class="roadmap-item pending">
                         <i class="bi bi-hourglass-split"></i>
-                        <span>Múltiples almacenes/ubicaciones</span>
+                        <span data-i18n="roadmap-pend-7">Múltiples almacenes/ubicaciones</span>
                       </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-6 col-md-6">
                       <div class="roadmap-item pending">
                         <i class="bi bi-hourglass-split"></i>
-                        <span>Entradas y salidas de productos</span>
+                        <span data-i18n="roadmap-pend-8">Entradas y salidas de productos</span>
                       </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-6 col-md-6">
                       <div class="roadmap-item pending">
                         <i class="bi bi-hourglass-split"></i>
-                        <span>Notificaciones por email</span>
+                        <span data-i18n="roadmap-pend-9">Notificaciones por email</span>
                       </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-6 col-md-6">
                       <div class="roadmap-item pending">
                         <i class="bi bi-hourglass-split"></i>
-                        <span>Roles y permisos de usuario</span>
+                        <span data-i18n="roadmap-pend-10">Roles y permisos de usuario</span>
                       </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-6 col-md-6">
                       <div class="roadmap-item pending">
                         <i class="bi bi-hourglass-split"></i>
-                        <span>Importar/Exportar datos (CSV/Excel)</span>
+                        <span data-i18n="roadmap-pend-11">Importar/Exportar datos (CSV/Excel)</span>
                       </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-6 col-md-6">
                       <div class="roadmap-item pending">
                         <i class="bi bi-hourglass-split"></i>
-                        <span>Filtros avanzados de búsqueda</span>
+                        <span data-i18n="roadmap-pend-12">Filtros avanzados de búsqueda</span>
                       </div>
                     </div>
                   </div>
@@ -353,16 +359,16 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 mx-auto text-center">
-            <h2 class="cta-title mb-4">
+            <h2 class="cta-title mb-4" data-i18n="cta-title">
               ¿Listo para optimizar tu inventario?
             </h2>
-            <p class="cta-subtitle mb-5">
+            <p class="cta-subtitle mb-5" data-i18n="cta-subtitle">
               Únete ahora y comienza a gestionar tu inventario de manera
               profesional
             </p>
             <a href="Views/Auth/login.html" class="btn btn-primary btn-lg cta-button">
               <i class="bi bi-arrow-right-circle me-2"></i>
-              Acceder al Sistema
+              <span data-i18n="cta-button">Acceder al Sistema</span>
             </a>
           </div>
         </div>
@@ -377,14 +383,14 @@
         <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
           <p class="footer-text mb-0">
             <i class="bi bi-code-slash me-2"></i>
-            Desarrollado con pasión por
+            <span data-i18n="footer-dev">Desarrollado con pasión por</span>
             <span class="footer-highlight">Sunshide</span>
           </p>
         </div>
         <div class="col-md-6 text-center text-md-end">
           <a href="https://github.com/Sunshide12" target="_blank" rel="noopener noreferrer" class="footer-link">
             <i class="bi bi-github me-2"></i>
-            GitHub: Sunshide12
+            <span data-i18n="footer-github">GitHub: Sunshide12</span>
           </a>
         </div>
       </div>
