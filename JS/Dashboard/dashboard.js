@@ -9,6 +9,7 @@ import { supabase } from "../Config/supabaseClient.js";
 import { obtenerSesion, cerrarSesion } from "../Auth/auth.js";
 import { initProductsUI, loadProducts } from "./productos.js";
 import { initCategoriesUI, loadCategories } from "./categorias.js";
+import { initMovementsUI, loadMovements } from "./movimientos.js";
 import { loadDashboardStats } from "./dashboardStats.js";
 
 let currentUser = null;
@@ -27,10 +28,11 @@ function setPageTitle(section) {
 
   const map = {
     dashboard: "Dashboard",
-    products: "Products",
-    categories: "Categories",
-    reports: "Reports",
-    settings: "Settings",
+    products: "Productos",
+    categories: "Categorías",
+    movements: "Movimientos",
+    reports: "Reportes",
+    settings: "Configuración",
   };
   pageTitle.textContent = map[section] || "Dashboard";
 }
@@ -66,6 +68,9 @@ export async function showSection(section) {
   } else if (section === "categories") {
     initCategoriesUI({ userId: currentUser?.id });
     await loadCategories(currentUser?.id);
+  } else if (section === "movements") {
+    initMovementsUI({ userId: currentUser?.id });
+    await loadMovements(currentUser?.id);
   }
 }
 

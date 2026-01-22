@@ -918,6 +918,13 @@ body.dashboard-page {
     background-color: var(--bg-primary);
 }
 
+/* Movimientos - detalle dentro de la tabla */
+.movement-detail {
+    white-space: normal;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
 /* Acciones rápidas */
 .d-flex.gap-2 {
     gap: 0.5rem !important;

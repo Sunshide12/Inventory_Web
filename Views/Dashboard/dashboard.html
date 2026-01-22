@@ -44,6 +44,10 @@
           <i class="bi bi-tags"></i>
           <span>Categorías</span>
         </a>
+        <a href="#" class="nav-item" data-section="movements">
+          <i class="bi bi-arrow-left-right"></i>
+          <span>Movimientos</span>
+        </a>
         <a href="#" class="nav-item" data-section="reports">
           <i class="bi bi-graph-up"></i>
           <span>Reportes</span>
@@ -322,6 +326,70 @@
                 >
                   <i class="bi bi-plus-lg me-2"></i>Agregar Categoría
                 </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section: Movements -->
+        <section class="js-section" data-section="movements" style="display: none;">
+          <div class="content-section">
+            <div class="section-header">
+              <h2 class="section-title">
+                <i class="bi bi-arrow-left-right me-2"></i>Movimientos
+              </h2>
+
+              <div class="d-flex flex-wrap gap-2 align-items-center">
+                <div class="btn-group" role="group" aria-label="Filtro de fecha">
+                  <input class="btn-check" type="radio" name="movementsFilterType" id="movementsFilterDay" autocomplete="off" checked />
+                  <label class="btn btn-outline-primary" for="movementsFilterDay">Día</label>
+
+                  <input class="btn-check" type="radio" name="movementsFilterType" id="movementsFilterMonth" autocomplete="off" />
+                  <label class="btn btn-outline-primary" for="movementsFilterMonth">Mes</label>
+
+                  <input class="btn-check" type="radio" name="movementsFilterType" id="movementsFilterYear" autocomplete="off" />
+                  <label class="btn btn-outline-primary" for="movementsFilterYear">Año</label>
+                </div>
+
+                <div id="movementsFilterInputs" class="d-flex flex-wrap gap-2 align-items-center">
+                  <input type="date" class="form-control" id="movementsDayInput" aria-label="Filtrar por día" />
+                  <input type="month" class="form-control d-none" id="movementsMonthInput" aria-label="Filtrar por mes" />
+                  <input type="number" class="form-control d-none" id="movementsYearInput" aria-label="Filtrar por año" min="2000" max="2100" step="1" placeholder="Año" />
+                </div>
+
+                <button class="btn btn-outline-secondary" id="movementsRefreshBtn" type="button">
+                  <i class="bi bi-arrow-clockwise me-2"></i>Actualizar
+                </button>
+              </div>
+            </div>
+
+            <div class="table-card">
+              <div class="table-responsive">
+                <table class="table table-hover" id="movementsTable">
+                  <thead>
+                    <tr>
+                      <th>Fecha</th>
+                      <th>Entidad</th>
+                      <th>Acción</th>
+                      <th>Nombre</th>
+                      <th>ID</th>
+                      <th>Detalle</th>
+                    </tr>
+                  </thead>
+                  <tbody id="movementsTableBody">
+                    <!-- Movements will be loaded here -->
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="empty-state" id="movementsEmptyState" style="display: none;">
+                <i class="bi bi-inbox"></i>
+                <h3>No hay movimientos para el filtro seleccionado</h3>
+                <p>Prueba cambiando el día, mes o año.</p>
+              </div>
+
+              <div class="px-3 pb-3">
+                <small class="text-muted" id="movementsStatus"></small>
               </div>
             </div>
           </div>
