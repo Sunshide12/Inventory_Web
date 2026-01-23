@@ -1,9 +1,16 @@
 import { supabase } from "../Config/supabaseClient.js";
+import {
+  getEffectiveUserId,
+  getProducts,
+  invalidateProductsCache as invalidateGlobalProductsCache,
+  updateProductInCache,
+  removeProductFromCache,
+} from "../Utils/cache.js";
 
 let productsUIInitialized = false;
 let isLoadingProducts = false;
-let productsCache = null; // Cache of loaded products
-let productsCacheUserId = null; // User ID of the cache
+// Local cache reference for quick access during rendering
+let localProductsCache = null;
 
 function showAlert(type, message) {
   const isSuccess = type === "success";
@@ -20,13 +27,6 @@ function showAlert(type, message) {
     alertEl.classList.remove("show");
     alertEl.classList.add("fade");
   }, 3500);
-}
-
-async function getEffectiveUserId(userId) {
-  if (userId) return userId;
-  const { data, error } = await supabase.auth.getUser();
-  if (error) throw error;
-  return data?.user?.id || null;
 }
 
 function getBootstrapModalInstance(modalEl) {
@@ -50,23 +50,17 @@ export async function loadProducts(userId, forceReload = false) {
       throw new Error("Could not determine authenticated user.");
     }
 
-    // If there's valid cache and reload is not forced, use cache
-    if (!forceReload && productsCache && productsCacheUserId === effectiveUserId) {
+    // Use shared cache - only need to check local reference for immediate renders
+    if (!forceReload && localProductsCache) {
       const searchTerm = document.getElementById("searchInput")?.value || "";
-      renderProducts(productsCache.products, productsCache.categoriesMap, searchTerm);
+      renderProducts(localProductsCache.products, localProductsCache.categoriesMap, searchTerm);
       return;
     }
 
     isLoadingProducts = true;
 
-    // Load products
-    const { data: products, error: productsError } = await supabase
-      .from("products")
-      .select("*")
-      .eq("user_id", effectiveUserId)
-      .order("id", { ascending: true });
-
-    if (productsError) throw productsError;
+    // Use centralized cache - handles selective field queries and caching
+    const { products, categoriesMap } = await getProducts(effectiveUserId, forceReload);
 
     const tbody = document.getElementById("productsTableBody");
     const emptyState = document.getElementById("emptyState");
@@ -76,41 +70,19 @@ export async function loadProducts(userId, forceReload = false) {
       return;
     }
 
-    // Clear tbody completely before adding new elements
-    tbody.innerHTML = "";
-
     if (!products || products.length === 0) {
+      tbody.innerHTML = "";
       emptyState.style.display = "block";
       return;
     } else {
       emptyState.style.display = "none";
     }
 
-    // Get unique category IDs
-    const categoryIds = [...new Set(products.map(p => p.category_id).filter(Boolean))];
-    
-    // Load categories if there are products with categories
-    let categoriesMap = new Map();
-    if (categoryIds.length > 0) {
-      const { data: categories, error: categoriesError } = await supabase
-        .from("categories")
-        .select("id, name")
-        .eq("user_id", effectiveUserId)
-        .in("id", categoryIds);
-
-      if (!categoriesError && categories) {
-        categories.forEach(cat => {
-          categoriesMap.set(cat.id, cat.name);
-        });
-      }
-    }
-
-    // Save to cache
-    productsCache = {
+    // Save local reference for quick re-renders
+    localProductsCache = {
       products,
       categoriesMap,
     };
-    productsCacheUserId = effectiveUserId;
 
     // Render products (with search if there's an active term)
     const searchTerm = document.getElementById("searchInput")?.value || "";
@@ -131,18 +103,15 @@ function renderProducts(products, categoriesMap, searchTerm = "") {
     return;
   }
 
-  // Clear tbody completely before adding new elements
-  tbody.innerHTML = "";
-
   // Filter products according to search term
   let filteredProducts = products;
   if (searchTerm && searchTerm.trim() !== "") {
     const searchLower = searchTerm.toLowerCase().trim();
     filteredProducts = products.filter((product) => {
-      const categoryName = product.category_id 
+      const categoryName = product.category_id
         ? (categoriesMap.get(product.category_id) || "Categoría no encontrada")
         : "Sin categoría";
-      
+
       // Search in: ID, name, category, description
       return (
         String(product.id).includes(searchLower) ||
@@ -154,6 +123,7 @@ function renderProducts(products, categoriesMap, searchTerm = "") {
   }
 
   if (!filteredProducts || filteredProducts.length === 0) {
+    tbody.innerHTML = "";
     emptyState.style.display = "block";
     // Update empty state message if there's an active search
     if (searchTerm && searchTerm.trim() !== "") {
@@ -172,30 +142,36 @@ function renderProducts(products, categoriesMap, searchTerm = "") {
     emptyState.style.display = "none";
   }
 
+  // Use DocumentFragment for batched DOM updates (better performance)
+  const fragment = document.createDocumentFragment();
+
   // Render filtered products with category names
   filteredProducts.forEach((product) => {
     const tr = document.createElement("tr");
     tr.setAttribute("data-product-id", product.id);
-    
+
     // Get category name from map
-    const categoryName = product.category_id 
+    const categoryName = product.category_id
       ? (categoriesMap.get(product.category_id) || "Category not found")
       : "No category";
+
+    const price = Number(product.price) || 0;
+    const stock = Number(product.stock) || 0;
 
     tr.innerHTML = `
       <td>${product.id}</td>
       <td>${product.name}</td>
       <td>${categoryName}</td>
-      <td class="stock-cell" data-product-id="${product.id}" data-current-stock="${product.stock}">
+      <td class="stock-cell" data-product-id="${product.id}" data-current-stock="${stock}">
         <div class="d-flex align-items-center gap-2">
-          <span class="stock-display">${product.stock}</span>
+          <span class="stock-display">${stock}</span>
           <button class="btn btn-sm btn-warning btn-edit-stock" data-id="${product.id}" title="Editar stock">
             <i class="bi bi-pencil"></i>
           </button>
         </div>
         <div class="stock-edit-container d-none mt-2">
           <div class="d-flex align-items-center gap-2">
-            <input type="number" class="stock-input form-control form-control-sm" min="0" value="${product.stock}" style="width: 100px;">
+            <input type="number" class="stock-input form-control form-control-sm" min="0" value="${stock}" style="width: 100px;">
             <button class="btn btn-sm btn-success btn-save-stock" data-id="${product.id}">
               <i class="bi bi-check"></i>
             </button>
@@ -205,8 +181,8 @@ function renderProducts(products, categoriesMap, searchTerm = "") {
           </div>
         </div>
       </td>
-      <td>$${product.price.toFixed(2)}</td>
-      <td class="status-cell">${product.stock > 0 ? "Disponible" : "Agotado"}</td>
+      <td>$${price.toFixed(2)}</td>
+      <td class="status-cell">${stock > 0 ? "Disponible" : "Agotado"}</td>
       <td>
         <button class="btn btn-sm btn-warning btn-edit" data-id="${product.id}">
           <i class="bi bi-pencil"></i>
@@ -217,14 +193,18 @@ function renderProducts(products, categoriesMap, searchTerm = "") {
       </td>
     `;
 
-    tbody.appendChild(tr);
+    fragment.appendChild(tr);
   });
+
+  // Single DOM update with all rows
+  tbody.innerHTML = "";
+  tbody.appendChild(fragment);
 }
 
 // Function to invalidate cache (call after create/edit/delete)
 export function invalidateProductsCache() {
-  productsCache = null;
-  productsCacheUserId = null;
+  localProductsCache = null;
+  invalidateGlobalProductsCache();
 }
 
 async function loadCategories(userId) {
@@ -286,13 +266,13 @@ export function initProductsUI({ userId } = {}) {
     let searchTimeout;
     searchInput.addEventListener("input", (e) => {
       const searchTerm = e.target.value;
-      
+
       // Debounce: wait 300ms after user stops typing
       clearTimeout(searchTimeout);
       searchTimeout = setTimeout(() => {
-        // If there's cache, filter from cache
-        if (productsCache && productsCacheUserId) {
-          renderProducts(productsCache.products, productsCache.categoriesMap, searchTerm);
+        // If there's local cache, filter from cache (instant render)
+        if (localProductsCache) {
+          renderProducts(localProductsCache.products, localProductsCache.categoriesMap, searchTerm);
         } else {
           // If no cache, reload products
           loadProducts(userId, false);
@@ -305,8 +285,8 @@ export function initProductsUI({ userId } = {}) {
       if (e.key === "Enter") {
         e.preventDefault();
         const searchTerm = e.target.value;
-        if (productsCache && productsCacheUserId) {
-          renderProducts(productsCache.products, productsCache.categoriesMap, searchTerm);
+        if (localProductsCache) {
+          renderProducts(localProductsCache.products, localProductsCache.categoriesMap, searchTerm);
         } else {
           loadProducts(userId, false);
         }
@@ -417,18 +397,17 @@ export function initProductsUI({ userId } = {}) {
           statusCell.textContent = newStock > 0 ? "Disponible" : "Agotado";
         }
         
-        // Update cache if it exists
-        if (productsCache && productsCache.products) {
-          const cachedProduct = productsCache.products.find(p => p.id === parseInt(productId, 10));
+        // Update local cache if it exists
+        if (localProductsCache && localProductsCache.products) {
+          const cachedProduct = localProductsCache.products.find(p => p.id === parseInt(productId, 10));
           if (cachedProduct) {
             cachedProduct.stock = newStock;
           }
         }
+        // Also update global cache
+        updateProductInCache(productId, { stock: newStock });
 
         showAlert("success", "Stock actualizado correctamente.");
-        
-        // Invalidate cache to ensure consistency
-        invalidateProductsCache();
       } catch (err) {
         console.error("Error updating stock:", err);
         stockInput.value = currentStock;

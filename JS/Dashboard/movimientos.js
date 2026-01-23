@@ -1,4 +1,5 @@
 import { supabase } from "../Config/supabaseClient.js";
+import { getEffectiveUserId } from "../Utils/cache.js";
 
 let movementsUIInitialized = false;
 let isLoadingMovements = false;
@@ -46,13 +47,6 @@ function showAlert(type, message) {
     alertEl.classList.remove("show");
     alertEl.classList.add("fade");
   }, 3500);
-}
-
-async function getEffectiveUserId(userId) {
-  if (userId) return userId;
-  const { data, error } = await supabase.auth.getUser();
-  if (error) throw error;
-  return data?.user?.id || null;
 }
 
 function setStatus(text) {
@@ -201,14 +195,16 @@ function renderMovements(logs) {
   const tbody = document.getElementById("movementsTableBody");
   if (!tbody) return;
 
-  tbody.innerHTML = "";
-
   if (!logs || logs.length === 0) {
+    tbody.innerHTML = "";
     setEmptyStateVisible(true);
     return;
   }
 
   setEmptyStateVisible(false);
+
+  // Use DocumentFragment for batched DOM updates
+  const fragment = document.createDocumentFragment();
 
   logs.forEach((log) => {
     const tr = document.createElement("tr");
@@ -221,8 +217,12 @@ function renderMovements(logs) {
       <td>${log.record_id ?? "-"}</td>
       <td class="movement-detail">${buildDetalle(log)}</td>
     `;
-    tbody.appendChild(tr);
+    fragment.appendChild(tr);
   });
+
+  // Single DOM update
+  tbody.innerHTML = "";
+  tbody.appendChild(fragment);
 }
 
 export async function loadMovements(userId, { forceReload = false } = {}) {

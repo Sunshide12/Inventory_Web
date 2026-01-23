@@ -11,6 +11,7 @@ import { initProductsUI, loadProducts } from "./productos.js";
 import { initCategoriesUI, loadCategories } from "./categorias.js";
 import { initMovementsUI, loadMovements } from "./movimientos.js";
 import { loadDashboardStats } from "./dashboardStats.js";
+import { invalidateAllCaches } from "../Utils/cache.js";
 
 let currentUser = null;
 let currentSection = null;
@@ -149,12 +150,15 @@ export async function checkAuth() {
 export async function handleLogout() {
   try {
     const result = await cerrarSesion();
-    
+
+    // Clear all caches on logout
+    invalidateAllCaches();
+
     if (result.success) {
       // Clear any local state
       currentUser = null;
       currentSection = null;
-      
+
       // Redirect to login page
       redirectToLogin();
     } else {

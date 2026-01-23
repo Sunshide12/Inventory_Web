@@ -1,9 +1,14 @@
 import { supabase } from "../Config/supabaseClient.js";
+import {
+  getEffectiveUserId,
+  getCategories,
+  invalidateCategoriesCache as invalidateGlobalCategoriesCache,
+} from "../Utils/cache.js";
 
 let categoriesUIInitialized = false;
 let isLoadingCategories = false;
-let categoriesCache = null; // Cache de categorías cargadas
-let categoriesCacheUserId = null; // ID del usuario del cache
+// Local cache reference for quick access during rendering
+let localCategoriesCache = null;
 
 function showAlert(type, message) {
   const isSuccess = type === "success";
@@ -20,13 +25,6 @@ function showAlert(type, message) {
     alertEl.classList.remove("show");
     alertEl.classList.add("fade");
   }, 3500);
-}
-
-async function getEffectiveUserId(userId) {
-  if (userId) return userId;
-  const { data, error } = await supabase.auth.getUser();
-  if (error) throw error;
-  return data?.user?.id || null;
 }
 
 function getBootstrapModalInstance(modalEl) {
@@ -49,22 +47,16 @@ export async function loadCategories(userId, forceReload = false) {
       throw new Error("No se pudo determinar el usuario autenticado.");
     }
 
-    // Si hay cache válido y no se fuerza recarga, usar cache
-    if (!forceReload && categoriesCache && categoriesCacheUserId === effectiveUserId) {
-      renderCategories(categoriesCache);
+    // Use local cache for immediate renders
+    if (!forceReload && localCategoriesCache) {
+      renderCategories(localCategoriesCache);
       return;
     }
 
     isLoadingCategories = true;
 
-    // Cargar categorías
-    const { data: categories, error } = await supabase
-      .from("categories")
-      .select("*")
-      .eq("user_id", effectiveUserId)
-      .order("name", { ascending: true });
-
-    if (error) throw error;
+    // Use centralized cache - handles caching and selective fields
+    const { categories } = await getCategories(effectiveUserId, forceReload);
 
     const tbody = document.getElementById("categoriesTableBody");
     const emptyState = document.getElementById("categoriesEmptyState");
@@ -74,9 +66,8 @@ export async function loadCategories(userId, forceReload = false) {
       return;
     }
 
-    // Guardar en cache
-    categoriesCache = categories;
-    categoriesCacheUserId = effectiveUserId;
+    // Guardar referencia local para re-renders rápidos
+    localCategoriesCache = categories;
 
     // Renderizar categorías
     renderCategories(categories);
@@ -96,15 +87,16 @@ function renderCategories(categories) {
     return;
   }
 
-  // Limpiar completamente el tbody antes de agregar nuevos elementos
-  tbody.innerHTML = "";
-
   if (!categories || categories.length === 0) {
+    tbody.innerHTML = "";
     emptyState.style.display = "block";
     return;
   } else {
     emptyState.style.display = "none";
   }
+
+  // Use DocumentFragment for batched DOM updates
+  const fragment = document.createDocumentFragment();
 
   // Renderizar categorías
   categories.forEach((category) => {
@@ -133,14 +125,18 @@ function renderCategories(categories) {
       </td>
     `;
 
-    tbody.appendChild(tr);
+    fragment.appendChild(tr);
   });
+
+  // Single DOM update
+  tbody.innerHTML = "";
+  tbody.appendChild(fragment);
 }
 
 // Función para invalidar el cache (llamar después de crear/editar/eliminar)
 export function invalidateCategoriesCache() {
-  categoriesCache = null;
-  categoriesCacheUserId = null;
+  localCategoriesCache = null;
+  invalidateGlobalCategoriesCache();
 }
 
 export function initCategoriesUI({ userId } = {}) {
